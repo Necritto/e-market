@@ -23,4 +23,22 @@ router.get("/:id", async (req, res) => {
   });
 });
 
+router.get("/:id/edit", async (req, res) => {
+  if (!req.query.allow) {
+    return res.redirect("/");
+  }
+
+  const course = await Course.getOneById(req.params.id);
+
+  res.render("course-edit", {
+    title: `Update course ${course.title}`,
+    course,
+  });
+});
+
+router.post("/edit", async (req, res) => {
+  await Course.update(req.body);
+  res.redirect("/courses");
+});
+
 module.exports = router;
