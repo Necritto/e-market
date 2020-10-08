@@ -1,0 +1,8 @@
+.nav-wrapper {
+  padding: 0 2rem;
+}
+
+.brand-logo img {
+  max-width: 60px;
+  vertical-align: baseline;
+}
