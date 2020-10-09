@@ -43,3 +43,7 @@
   align-items: center;
   justify-content: space-around;
 }
+
+.form {
+  margin-bottom: 2rem;
+}
