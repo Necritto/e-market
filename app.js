@@ -1,6 +1,12 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const handlebars = require("handlebars");
+const {
+  allowInsecurePrototypeAccess,
+} = require("@handlebars/allow-prototype-access");
 const path = require("path");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 const homeRouter = require("./routes/home");
 const coursesRouter = require("./routes/courses");
@@ -12,6 +18,7 @@ const app = express();
 const hbs = exphbs.create({
   defaultLayout: "main",
   extname: "hbs",
+  handlebars: allowInsecurePrototypeAccess(handlebars),
 });
 
 app.engine("hbs", hbs.engine);
@@ -27,6 +34,21 @@ app.use("/cart", cartRouter);
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on ${PORT} port...`);
-});
+async function start() {
+  try {
+    const DB_CONN = process.env.DB_CONN;
+    await mongoose.connect(DB_CONN, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    });
+
+    app.listen(PORT, () => {
+      console.log(`Server running on ${PORT} port...`);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+start();
