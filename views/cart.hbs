@@ -1,0 +1,31 @@
+<h1>Basket</h1>
+
+<div id="cart">
+  {{#if courses.length}}
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each courses}}
+      <tr>
+        <td>{{title}}</td>
+        <td>{{count}}</td>
+        <td>
+          <button class="btn btn-small waves-effect waves-light remove" data-id="{{id}}">Remove</button>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <p><strong>Amount:</strong> <span class="price">{{price}}</span></p>
+  {{else}}
+  <p>Your cart is still empty!</p>
+  {{/if}}
+</div>
