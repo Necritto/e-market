@@ -25,6 +25,14 @@
   </table>
 
   <p><strong>Amount:</strong> <span class="price">{{price}}</span></p>
+
+  <form action="/orders" method="post">
+    <button class="btn btn-large waves-effect waves-light">
+      buy
+      <i class="material-icons right">account_balance_wallet</i>
+    </button>
+  </form>
+
   {{else}}
   <p>Your cart is still empty!</p>
   {{/if}}
