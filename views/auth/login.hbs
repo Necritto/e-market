@@ -1,0 +1,63 @@
+<div class="auth">
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s6"><a class="active" href="#login">Log In</a></li>
+        <li class="tab col s6"><a href="#signup">Sign Up</a></li>
+      </ul>
+    </div>
+    <div id="login" class="col s16 offset-s3">
+      <h1>Enter the e-market</h1>
+
+      <form action="/auth/login" method="POST">
+
+        <div class="input-field">
+          <input placeholder="Enter email" id="email" name="email" type="email" class="validate" required>
+          <label for="email">Email</label>
+          <span class="helper-text" data-error="Invalid email"></span>
+        </div>
+
+        <div class="input-field">
+          <input placeholder="Enter password" id="password" name="password" type="password" class="validate" required>
+          <label for="password">Password</label>
+          <span class="helper-text" data-error="Invalid password"></span>
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit">Log in
+          <i class="material-icons right">login</i>
+        </button>
+
+      </form>
+    </div>
+    <div id="signup" class="col s16 offset-s3">
+      <h1>Create new account</h1>
+
+      <form action="/auth/sighup" method="POST">
+
+        <div class="input-field">
+          <input placeholder="Enter email" id="reg_email" name="email" type="email" class="validate" required>
+          <label for="reg_email">Email</label>
+          <span class="helper-text" data-error="Invalid email"></span>
+        </div>
+
+        <div class="input-field">
+          <input placeholder="Enter password" id="reg_password" name="password" type="password" class="validate"
+            required>
+          <label for="reg_password">Password</label>
+          <span class="helper-text" data-error="Invalid password"></span>
+        </div>
+
+        <div class="input-field">
+          <input placeholder="Confirm password" id="confirm" name="confirm" type="password" class="validate" required>
+          <label for="confirm">Confirm password</label>
+          <span class="helper-text" data-error="Invalid password"></span>
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit">Sign up
+          <i class="material-icons right">account_circle</i>
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
