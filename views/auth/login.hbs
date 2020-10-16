@@ -32,7 +32,13 @@
     <div id="signup" class="col s16 offset-s3">
       <h1>Create new account</h1>
 
-      <form action="/auth/sighup" method="POST">
+      <form action="/auth/signup" method="POST">
+
+        <div class="input-field">
+          <input placeholder="Enter name" id="name" name="name" type="text" class="validate" required>
+          <label for="name">Name</label>
+          <span class="helper-text" data-error="Invalid name"></span>
+        </div>
 
         <div class="input-field">
           <input placeholder="Enter email" id="reg_email" name="email" type="email" class="validate" required>
