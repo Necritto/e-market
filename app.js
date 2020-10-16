@@ -16,6 +16,7 @@ const cartRouter = require("./routes/cart");
 const ordersRouter = require("./routes/orders");
 const authRouter = require("./routes/auth");
 const varMiddleware = require("./middleware/var");
+const userMiddleware = require("./middleware/user");
 
 const app = express();
 const DB_CONN = process.env.DB_CONN;
@@ -46,6 +47,7 @@ app.use(
   })
 );
 app.use(varMiddleware);
+app.use(userMiddleware);
 
 app.use("/", homeRouter);
 app.use("/courses", coursesRouter);
