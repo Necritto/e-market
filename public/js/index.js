@@ -31,9 +31,13 @@ if ($cart) {
   $cart.addEventListener("click", (e) => {
     if (e.target.classList.contains("remove")) {
       const id = e.target.dataset.id;
+      const csrf = e.target.dataset.csrf;
 
       fetch("/cart/remove/" + id, {
         method: "delete",
+        headers: {
+          "X-XSRF-TOKEN": csrf,
+        },
       })
         .then((res) => res.json())
         .then((cart) => {

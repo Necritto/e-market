@@ -17,7 +17,8 @@
         <td>{{title}}</td>
         <td>{{count}}</td>
         <td>
-          <button class="btn btn-small waves-effect waves-light remove" data-id="{{id}}">Remove</button>
+          <button class="btn btn-small waves-effect waves-light remove" data-csrf="{{@root.csrf}}"
+            data-id="{{id}}">Remove</button>
         </td>
       </tr>
       {{/each}}
@@ -27,6 +28,7 @@
   <p><strong>Amount:</strong> <span class="price">{{price}}</span></p>
 
   <form action="/orders" method="post">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
     <button class="btn btn-large waves-effect waves-light">
       buy
       <i class="material-icons right">account_balance_wallet</i>

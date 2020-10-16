@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
+const csurf = require("csurf");
 const homeRouter = require("./routes/home");
 const coursesRouter = require("./routes/courses");
 const addRouter = require("./routes/add");
@@ -46,6 +47,7 @@ app.use(
     store,
   })
 );
+app.use(csurf());
 app.use(varMiddleware);
 app.use(userMiddleware);
 
