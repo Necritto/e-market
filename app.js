@@ -10,6 +10,7 @@ require("dotenv").config();
 const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
 const csurf = require("csurf");
+const flash = require("connect-flash");
 const homeRouter = require("./routes/home");
 const coursesRouter = require("./routes/courses");
 const addRouter = require("./routes/add");
@@ -48,6 +49,7 @@ app.use(
   })
 );
 app.use(csurf());
+app.use(flash());
 app.use(varMiddleware);
 app.use(userMiddleware);
 

@@ -8,6 +8,8 @@ router.get("/login", async (req, res) => {
   res.render("auth/login", {
     title: "Auth",
     isLogin: true,
+    regErr: req.flash("regErr"),
+    loginErr: req.flash("loginErr"),
   });
 });
 
@@ -29,9 +31,11 @@ router.post("/login", async (req, res) => {
           res.redirect("/");
         });
       } else {
+        req.flash("loginErr", "Invalid password");
         res.redirect("/auth/login#login");
       }
     } else {
+      req.flash("loginErr", "User with this email does not exists");
       res.redirect("/auth/login#login");
     }
   } catch (err) {
@@ -51,6 +55,7 @@ router.post("/signup", async (req, res) => {
     const candidate = await User.findOne({ email });
 
     if (candidate) {
+      req.flash("regErr", "User with this email already exists");
       res.redirect("/auth/login#signup");
     } else {
       const hashPass = await bcrypt.hash(password, 10);
