@@ -19,9 +19,11 @@ const addRouter = require("./routes/add");
 const cartRouter = require("./routes/cart");
 const ordersRouter = require("./routes/orders");
 const authRouter = require("./routes/auth");
+const profileRouter = require("./routes/profile");
 const varMiddleware = require("./middleware/var");
 const userMiddleware = require("./middleware/user");
 const errorMiddleware = require("./middleware/error");
+const fileMiddleware = require("./middleware/file");
 
 const app = express();
 const DB_CONN = process.env.DB_CONN;
@@ -44,6 +46,7 @@ app.set("view engine", "hbs");
 app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
@@ -53,6 +56,7 @@ app.use(
     store,
   })
 );
+app.use(fileMiddleware.single("avatar"));
 app.use(csurf());
 app.use(flash());
 app.use(varMiddleware);
@@ -64,6 +68,7 @@ app.use("/add", addRouter);
 app.use("/cart", cartRouter);
 app.use("/orders", ordersRouter);
 app.use("/auth", authRouter);
+app.use("/profile", profileRouter);
 
 app.use(errorMiddleware);
 
