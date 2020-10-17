@@ -11,7 +11,9 @@ const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
 const csurf = require("csurf");
 const flash = require("connect-flash");
-const keys = require("./keys");
+const helmet = require("helmet");
+const compression = require("compression");
+const { MONGODB_URI, SESSION_SECRET } = require("./keys");
 
 const homeRouter = require("./routes/home");
 const coursesRouter = require("./routes/courses");
@@ -26,7 +28,6 @@ const errorMiddleware = require("./middleware/error");
 const fileMiddleware = require("./middleware/file");
 
 const app = express();
-const DB_CONN = process.env.DB_CONN;
 const PORT = process.env.PORT || 3000;
 
 const hbs = exphbs.create({
@@ -38,7 +39,7 @@ const hbs = exphbs.create({
 
 const store = new MongoStore({
   collection: "sessions",
-  uri: DB_CONN,
+  uri: MONGODB_URI,
 });
 
 app.engine("hbs", hbs.engine);
@@ -50,7 +51,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
-    secret: keys.SESSION_SECRET,
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store,
@@ -59,6 +60,8 @@ app.use(
 app.use(fileMiddleware.single("avatar"));
 app.use(csurf());
 app.use(flash());
+app.use(helmet());
+app.use(compression());
 app.use(varMiddleware);
 app.use(userMiddleware);
 
@@ -74,7 +77,7 @@ app.use(errorMiddleware);
 
 async function start() {
   try {
-    await mongoose.connect(DB_CONN, {
+    await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
