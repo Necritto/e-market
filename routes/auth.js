@@ -147,4 +147,27 @@ router.get("/password/:token", async (req, res) => {
   }
 });
 
+router.post("/password", async (req, res) => {
+  try {
+    const user = await User.findOne({
+      _id: req.body.userId,
+      resetToken: req.body.token,
+      resetTokenExp: { $gt: Date.now() },
+    });
+
+    if (user) {
+      user.password = await bcrypt.hash(req.body.password, 10);
+      user.resetToken = undefined;
+      user.resetTokenExp = undefined;
+      await user.save();
+      res.redirect("/auth/login");
+    } else {
+      req.flash("loginErr", "Token has expired!");
+      res.redirect("/auth/login");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;
