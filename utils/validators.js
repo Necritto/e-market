@@ -56,3 +56,11 @@ exports.loginValidators = [
     .isAlphanumeric()
     .trim(),
 ];
+
+exports.courseValidators = [
+  body("title", "The title must be at least 3 characters long.")
+    .isLength({ min: 3 })
+    .trim(),
+  body("price", "Incorrect price").isNumeric().trim(),
+  body("img", "Incorrect image url").isURL(),
+];
