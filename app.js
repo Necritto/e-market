@@ -11,6 +11,8 @@ const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
 const csurf = require("csurf");
 const flash = require("connect-flash");
+const keys = require("./keys");
+
 const homeRouter = require("./routes/home");
 const coursesRouter = require("./routes/courses");
 const addRouter = require("./routes/add");
@@ -42,7 +44,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
-    secret: "secret value",
+    secret: keys.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store,
