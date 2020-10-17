@@ -1,0 +1,41 @@
+<h1>Basket</h1>
+
+<div id="cart">
+  {{#if courses.length}}
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each courses}}
+      <tr>
+        <td>{{title}}</td>
+        <td>{{count}}</td>
+        <td>
+          <button class="btn btn-small waves-effect waves-light remove" data-csrf="{{@root.csrf}}"
+            data-id="{{id}}">Remove</button>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <p><strong>Amount:</strong> <span class="price">{{price}}</span></p>
+
+  <form action="/orders" method="post">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+    <button class="btn btn-large waves-effect waves-light">
+      buy
+      <i class="material-icons right">account_balance_wallet</i>
+    </button>
+  </form>
+
+  {{else}}
+  <p>Your cart is still empty!</p>
+  {{/if}}
+</div>

@@ -1,0 +1,57 @@
+<nav>
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo"><img src="img/logo.svg" alt="Courses"></a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+      {{#if isHome}}
+      <li class="active"><a href="/">Home</a></li>
+      {{else }}
+      <li><a href="/">Home</a></li>
+      {{/if }}
+
+      {{#if isCourses}}
+      <li class="active"><a href="/courses">Courses</a></li>
+      {{else }}
+      <li><a href="/courses">Courses</a></li>
+      {{/if }}
+
+      {{#if isAuth}}
+      {{#if isAdd}}
+      <li class="active"><a href="/add">Add course</a></li>
+      {{else }}
+      <li><a href="/add">Add course</a></li>
+      {{/if }}
+
+      {{#if isOrder}}
+      <li class="active"><a href="/orders">Orders</a></li>
+      {{else }}
+      <li><a href="/orders">Orders</a></li>
+      {{/if }}
+
+      {{#if isProfile}}
+      <li class="active"><a href="/profile"><i class="material-icons">assignment_ind</i></a></a></li>
+      {{else }}
+      <li><a href="/profile"><i class="material-icons">assignment_ind</i></a></a></li>
+      {{/if }}
+
+      {{#if isCart}}
+      <li class="active"><a href="/cart"><i class="material-icons">shopping_basket</i></a></li>
+      {{else }}
+      <li><a href="/cart"><i class="material-icons">shopping_basket</i></a></li>
+      {{/if }}
+
+      <li><a href="/auth/logout"><i class="material-icons">directions_run</i></a></li>
+
+      {{else}}
+
+      {{#if isLogin}}
+      <li class="active"><a href="/auth/login#login"><i class="material-icons">login</i></a></li>
+      {{else }}
+      <li><a href="/auth/login#login"><i class="material-icons">login</i></a></li>
+      {{/if }}
+
+      {{/if}}
+
+    </ul>
+  </div>
+</nav>
