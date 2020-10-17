@@ -122,4 +122,29 @@ router.post("/reset", (req, res) => {
   }
 });
 
+router.get("/password/:token", async (req, res) => {
+  if (!req.params.token) {
+    return res.redirect("/auth/login");
+  }
+  try {
+    const user = await User.findOne({
+      resetToken: req.params.token,
+      resetTokenExp: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.redirect("/auth/login");
+    } else {
+      res.render("auth/password", {
+        title: "Access recovery",
+        error: req.flash("error"),
+        userId: user._id.toString(),
+        token: req.params.token,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;
