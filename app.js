@@ -21,9 +21,11 @@ const ordersRouter = require("./routes/orders");
 const authRouter = require("./routes/auth");
 const varMiddleware = require("./middleware/var");
 const userMiddleware = require("./middleware/user");
+const errorMiddleware = require("./middleware/error");
 
 const app = express();
 const DB_CONN = process.env.DB_CONN;
+const PORT = process.env.PORT || 3000;
 
 const hbs = exphbs.create({
   defaultLayout: "main",
@@ -63,7 +65,7 @@ app.use("/cart", cartRouter);
 app.use("/orders", ordersRouter);
 app.use("/auth", authRouter);
 
-const PORT = process.env.PORT || 3000;
+app.use(errorMiddleware);
 
 async function start() {
   try {
