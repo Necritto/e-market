@@ -8,12 +8,13 @@ const { validationResult } = require("express-validator");
 const regEmail = require("../emails/signup");
 const resetEmail = require("../emails/reset");
 const { regValidators, loginValidators } = require("../utils/validators");
+const { SG_API_KEY } = require("../keys");
 
 const router = Router();
 
 const transporter = nodemailer.createTransport(
   sendgrid({
-    auth: { api_key: process.env.SG_API_KEY },
+    auth: { api_key: SG_API_KEY },
   })
 );
 
