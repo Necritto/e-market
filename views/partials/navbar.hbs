@@ -28,6 +28,12 @@
       <li><a href="/orders">Orders</a></li>
       {{/if }}
 
+      {{#if isProfile}}
+      <li class="active"><a href="/profile"><i class="material-icons">assignment_ind</i></a></a></li>
+      {{else }}
+      <li><a href="/profile"><i class="material-icons">assignment_ind</i></a></a></li>
+      {{/if }}
+
       {{#if isCart}}
       <li class="active"><a href="/cart"><i class="material-icons">shopping_basket</i></a></li>
       {{else }}
